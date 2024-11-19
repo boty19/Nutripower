@@ -1,0 +1,48 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<?php if(isset($_SESSION['errorreport'])) : ?>
+<div id="alerta2" class="position-absolute col-6">
+    <div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Informacion: </strong>
+            <?=$_SESSION['errorreport']?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<?php helps::deleteSession('errorreport'); ?>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="text-center mb-4">Ingresa el rango de fechas en el cual quieres filtrar</h2>
+            <form action="<?=init?><?=reports?><?=dates?>" method="post">
+                <div class="form-group mb-3">
+                    <label for="init">Fecha De Inicio</label>
+                    <input type="text" id="init" name="init" class="form-control" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="end">Fecha Final</label>
+                    <input type="text" id="end" name="end" class="form-control" required>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Incluir Flatpickr -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        flatpickr("#init", {
+            dateFormat: "Y-m-d"
+        });
+        flatpickr("#end", {
+            dateFormat: "Y-m-d"
+        });
+    });
+</script>
